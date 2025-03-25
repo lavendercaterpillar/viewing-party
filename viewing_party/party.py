@@ -26,6 +26,10 @@ def watch_movie(user_data, title):
             user_data["watchlist"].remove(movies)
     return user_data
 
+# def test_invalid_rating():
+#     # act & assert
+#     with pytest.raises(ValueError):
+#         watch_movie(….)
 
 # -----------------------------------------
 # ------------- WAVE 2 --------------------
