@@ -79,9 +79,18 @@ def get_watched_avg_rating(user_date):
     else:
         return 0
 
+# from collections import Counter
 
 def get_most_watched_genre(user_data):
-    
+
+    # if not user_data["watched"]:
+    #     return None
+    # genre_counter_list = [movie["genre"] for movie in user_data["watched"]]
+    # genre_counter = Counter(genre_counter_list)
+    # most_watched_genre = genre_counter.most_common(1)[0][0]
+    # return most_watched_genre
+
+
     genre_frequency = {}
 
     for movie in user_data["watched"]:
@@ -154,7 +163,7 @@ def get_available_recs(user_data):
     get_recs = []
     friends_unique_movie = get_friends_unique_watched(user_data) 
     for movie in friends_unique_movie:
-        if movie["host"] in user_data["subscriptions"]:
+        if movie["host"] in user_data.get("subscriptions",[]):
             get_recs.append(movie)
 
     return get_recs
@@ -182,18 +191,16 @@ def get_new_rec_by_genre(user_data):
 
 def get_rec_from_favorites(user_data):
 
-
-    friends_watched = set()
+    friends_watched_title = set()
     for each_friend in user_data["friends"]:
-        # for friend_movies in each_firend["watched"]:
-        friends_watched.add(each_friend["watched"])
+        for friend_movies in each_friend["watched"]:
+            friends_watched_title.add(friend_movies["title"])
 
     rec_from_favorite_list = []
     if not user_data["favorites"]:
         return []
-
     for movie in user_data["favorites"]:
-        if movie not in friends_watched:
+        if movie["title"] not in friends_watched_title:
             rec_from_favorite_list.append(movie)
     
     return rec_from_favorite_list

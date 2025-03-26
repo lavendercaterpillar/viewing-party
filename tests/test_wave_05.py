@@ -52,7 +52,8 @@ def test_new_genre_rec_from_empty_friends():
             }
         ]
     }
-    recommendations = test_new_genre_rec_from_empty_friends()
+    
+    recommendations = get_new_rec_by_genre(sonyas_data)
     assert len(recommendations) == 0
 
 
