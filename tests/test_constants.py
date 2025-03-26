@@ -182,6 +182,9 @@ USER_DATA_5["favorites"] = [
 
 #----Functions that return clean data for each test----
 
+# copy.deepcopy() recursively duplicates the original object, 
+# ensuring that the copy and the original do not share any references
+
 def clean_wave_2_data():
     return copy.deepcopy(USER_DATA_2)
 

@@ -64,6 +64,42 @@ def watch_movie(user_data, title):
 # ------------- WAVE 2 --------------------
 # -----------------------------------------
 
+def get_watched_avg_rating(user_date):
+    '''
+    receives user_data dict and returns average of all movies ratings in watched list
+    '''
+    counter = 0
+    sum = 0
+    for movie in user_date["watched"]:
+        sum += movie["rating"]
+        counter += 1
+    
+    if counter != 0:
+        return sum/counter
+    else:
+        return 0
+
+
+def get_most_watched_genre(user_data):
+    
+    genre_frequency = {}
+
+    for movie in user_data["watched"]:
+        if movie["genre"] not in genre_frequency:
+            genre_frequency[movie["genre"]] = 1
+        else:
+            genre_frequency[movie["genre"]] += 1
+    
+    most_watched_genre = None
+    most_watched_freq = 0
+
+    for genre, frequency in genre_frequency.items():
+        if frequency > most_watched_freq:
+            most_watched_freq = frequency
+            most_watched_genre = genre
+    
+    return most_watched_genre
+
 
 # -----------------------------------------
 # ------------- WAVE 3 --------------------
@@ -77,6 +113,7 @@ def watch_movie(user_data, title):
 # -----------------------------------------
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
+
 
 #------------ Wave 01 Print statement Tests -----------
 # MOVIE_TITLE_1 = "It Came from the Stack Trace"
@@ -124,3 +161,5 @@ def watch_movie(user_data, title):
 # print(add_to_watched(user_data, movie))
 # print(add_to_watchlist(user_data, movie))
 # print(watch_movie(user_data, MOVIE_TITLE_1))
+
+#------------ Wave 01 Print statement Tests -----------
