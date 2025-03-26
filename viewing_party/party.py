@@ -28,7 +28,7 @@ def add_to_watched(user_data, movie):
     and value as a list that has a dictionary of movie(s)
     output: function adds the movie dict information to the "watched" list of user
     '''
-    pass
+    user_data["watched"].append(movie)
 
     return user_data
 
