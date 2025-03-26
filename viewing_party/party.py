@@ -3,21 +3,17 @@
 
 # Clarifying questions:
 
-
 # invalid or missing input handling
-# what is None title,genre,rating
-# what if use_data = {}
+# what if user_data = {}
 
 def create_movie(title, genre, rating):
     '''
-    input title and genre as strings, ratign as number
-        MOVIE_TITLE_1 = "It Came from the Stack Trace"
-        GENRE_1 = "Horror"
-        RATING_1 = 3.5
-    output is a dictionary which has 3 key/value pairs; returns None if no title or genre or rating
+    input title and genre as strings, rating as number
+    output is a dictionary which has 3 key/value pairs; 
+    returns None if no title or genre or rating
     '''
 
-    if not "title" or not "rating" or not "genre":
+    if not title or not rating or not genre:
         return None
     else:
         return {"title": title,
@@ -49,22 +45,19 @@ def add_to_watchlist(user_data, movie):
 
 def watch_movie(user_data, title):
     '''
-    output: if the movie is in the user_data watchlist, 
-    we move the movie from the "watchlist" to the "watched" list in user_data 
+    output: if the movie's title is in the user_data watchlist movies, 
+    function moves the movie from the "watchlist" to the "watched" in user_data 
     '''
+    movies_to_remove = []
     for movies in user_data["watchlist"]:
         if movies["title"] == title:
             user_data["watched"].append(movies)
-            user_data["watchlist"].remove(movies)
+            movies_to_remove.append(movies)
+    
+    for movie in movies_to_remove:
+        user_data["watchlist"].remove(movies)
 
     return user_data
-
-# def test_invalid_rating():
-#     # act & assert
-#     with pytest.raises(ValueError):
-#         watch_movie(….)
-
-
 
 
 # -----------------------------------------
@@ -85,16 +78,17 @@ def watch_movie(user_data, title):
 # ------------- WAVE 5 --------------------
 # -----------------------------------------
 
-#-----------------------
-MOVIE_TITLE_1 = "It Came from the Stack Trace"
-GENRE_1 = "Horror"
-RATING_1 = 3.5
+#------------ Wave 01 Print statement Tests -----------
+# MOVIE_TITLE_1 = "It Came from the Stack Trace"
+# GENRE_1 = ""
+# # GENRE_1 = "Horror"
+# RATING_1 = 3.5
 
-movie = {
-    "title": MOVIE_TITLE_1,
-    "genre": GENRE_1,
-    "rating": RATING_1
-}
+# movie = {
+#     "title": MOVIE_TITLE_1,
+#     "genre": GENRE_1,
+#     "rating": RATING_1
+# }
 # user_data = {
 #     "watched": [],
 #     "watchlist": []
@@ -108,16 +102,25 @@ movie = {
 #     "watched": [],
 # }
 
-user_data = {
-    "watched": [{
-    "title": "The Lord of the Functions: The Fellowship of the Function",
-    "genre": "Fantasy",
-    "rating": 4.8
-}],
-    "watchlist": []
-}
+# user_data = {
+#     "watched": [{
+#     "title": "The Lord of the Functions: The Fellowship of the Function",
+#     "genre": "Fantasy",
+#     "rating": 4.8
+# }],
+#     "watchlist": []
+# }
+
+# janes_data = {
+#         "watchlist": [{
+#             "title": MOVIE_TITLE_1,
+#             "genre": GENRE_1,
+#             "rating": RATING_1
+#         }],
+#         "watched": []
+#     }
 
 # print(create_movie(MOVIE_TITLE_1, GENRE_1, RATING_1))
 # print(add_to_watched(user_data, movie))
-print(add_to_watchlist(user_data, movie))
-# print(watch_movie(user_data, movie))
+# print(add_to_watchlist(user_data, movie))
+# print(watch_movie(user_data, MOVIE_TITLE_1))

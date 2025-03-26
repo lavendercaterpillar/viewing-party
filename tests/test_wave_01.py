@@ -1,6 +1,6 @@
 import pytest
-# NOTE: In production code, we developers should change import * to something more specific. Due to some constraints of this project, we will import * in our test files.
-# from viewing_party.main import *
+# NOTE: In production code, we developers should change import * to something more specific. 
+# Due to some constraints of this project, we will import * in our test files.
 from viewing_party.party import *
 from tests.test_constants import *
 
@@ -158,11 +158,15 @@ def test_moves_movie_from_watchlist_to_empty_watched():
     # Assert
     assert len(updated_data["watchlist"]) == 0
     assert len(updated_data["watched"]) == 1
+
     
-    raise Exception("Test needs to be completed.")
+    # raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
+    assert updated_data["watched"][0]["title"] == MOVIE_TITLE_1
+    assert updated_data["watched"][0]["genre"] == GENRE_1
+    assert updated_data["watched"][0]["rating"] == RATING_1 
 
 # @pytest.mark.skip()
 def test_moves_movie_from_watchlist_to_watched():
@@ -183,10 +187,14 @@ def test_moves_movie_from_watchlist_to_watched():
     assert len(updated_data["watchlist"]) == 1
     assert len(updated_data["watched"]) == 2
     
-    raise Exception("Test needs to be completed.")
+    # raise Exception("Test needs to be completed.")
     # *******************************************************************************************
     # ****** Add assertions here to test that the correct movie was added to "watched" **********
     # *******************************************************************************************
+    assert updated_data["watched"][1]["title"] == MOVIE_TITLE_1
+    assert updated_data["watched"][1]["genre"] == GENRE_1
+    assert updated_data["watched"][1]["rating"] == RATING_1 
+
 
 # @pytest.mark.skip()
 def test_does_nothing_if_movie_not_in_watchlist():
