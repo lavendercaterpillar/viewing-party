@@ -135,12 +135,13 @@ def get_friends_unique_watched(user_data):
     movie_title = friends_watched - user_watched
 
     friends_unique_movie = []
-    seen_titles = set()
+    # seen_titles = set()
     for firend in user_data["friends"]:
         for friend_movies in firend["watched"]:
-            if friend_movies["title"] in movie_title and friend_movies["title"] not in seen_titles:
+            if friend_movies["title"] in movie_title and friend_movies not in friends_unique_movie :
+            # friend_movies["title"] not in seen_titles:
                 friends_unique_movie.append(friend_movies)
-                seen_titles.add(friend_movies["title"])
+                # seen_titles.add(friend_movies["title"])
     
     return friends_unique_movie
 
@@ -180,42 +181,20 @@ def get_new_rec_by_genre(user_data):
 
 
 def get_rec_from_favorites(user_data):
-    Favorite_list = []
+
+
+    friends_watched = set()
+    for each_friend in user_data["friends"]:
+        # for friend_movies in each_firend["watched"]:
+        friends_watched.add(each_friend["watched"])
+
+    rec_from_favorite_list = []
+    if not user_data["favorites"]:
+        return []
+
+    for movie in user_data["favorites"]:
+        if movie not in friends_watched:
+            rec_from_favorite_list.append(movie)
     
+    return rec_from_favorite_list
     
-    return Favorite_list
-
-
-MOVIE_TITLE_1 = "It Came from the Stack Trace"
-GENRE_1 = "Horror"
-RATING_1 = 3.5
-
-INTRIGUE_2 = {
-    "title": "Instructor Student TA Manager",
-    "genre": "Intrigue",
-    "rating": 4.5
-}
-INTRIGUE_3 = {
-    "title": "Zero Dark Python",
-    "genre": "Intrigue",
-    "rating": 3.0
-}
-HORROR_1 = {
-    "title": MOVIE_TITLE_1,
-    "genre": GENRE_1,
-    "rating": RATING_1
-}
-sonyas_data = {
-        "watched": [],
-        "favorites": [],
-        "friends": [
-            {
-                "watched": [INTRIGUE_2]
-            },
-            {
-                "watched": [INTRIGUE_3,HORROR_1]
-            }
-        ]
-    }
-
-print(get_rec_from_favorites(sonyas_data))
