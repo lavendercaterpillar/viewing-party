@@ -15,11 +15,13 @@ def create_movie(title, genre, rating):
 
     if not title or not rating or not genre:
         return None
-    else:
-        return {"title": title,
+    
+    return {
+                "title": title,
                 "genre": genre, 
                 "rating" : rating
-                }
+            }
+
         
 
 def add_to_watched(user_data, movie):
